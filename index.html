@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+		<link rel="stylesheet" type="text/css" href="style.css">
+		<script src="js/entries.js"></script>
+
+		<title>Contest Drawing</title>
+	</head>
+	<body>
+		<header>
+			<h1 class="header">Contest Drawing</h1>
+			<p id="info"></p>
+		</header>
+		<div id="container">
+			<section>
+				<button id="select-winner">Select A Winner</button>
+				<ul id="winners-list"></ul>
+			</section>
+			<section>
+				<h2>List Of Entries</h2>
+				<ul id="entries-list"></ul>
+			</section>
+		</div>
+
+		<script type="text/javascript">
+			$(document).ready(function() {
+				// Ensure the list of winners is always an array type
+				var winners = [];
+
+				function drawEntries() {
+					$('#entries-list').empty();
+					entries.sort().forEach(name => {
+						var className = '';
+						if (winners.includes(name)) className = 'strike';
+
+						$('#entries-list').append(`<li class=${className}>${name}</li>`);
+					});
+				}
+
+				function drawWinners() {
+					$('#winners-list').empty();
+					winners.forEach(name => {
+						$('#winners-list').append(`<li>${name}</li>`);
+					});
+				}
+
+				$('#info').text(`${contestName} - ${contestDate}`)
+
+				drawEntries();
+				drawWinners();
+
+				$(document).on('click', '#select-winner', function() {
+					// Determine all eligible entries that haven't been drawn yet
+					var possibilities = entries.filter(entry => !winners.includes(entry));
+
+					if (possibilities.length) {
+						// Select a winner from the list of possibilities
+						var winner = possibilities[Math.floor(Math.random() * (possibilities.length))];
+
+						// Add the new winner to the list of winners
+						winners.push(winner);
+
+						// Re-draw the lists
+						drawEntries();
+						drawWinners();
+					}
+				});
+			});
+		</script>
+	</body>
+</html>

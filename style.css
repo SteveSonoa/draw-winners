@@ -1,0 +1,47 @@
+*,
+body {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+    background: #81adec;
+}
+
+h1, h2, ul, button {
+    margin: 0 auto 10px;
+}
+
+button {
+    font-size: 1.5em;
+    padding: 10px 25px;
+}
+
+header {
+    text-align: center;
+}
+
+#container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+#container section {
+    margin-right: 25px;
+    min-width: 25vw;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    background: #fff;
+    border-radius: 10px;
+    padding: 10px;
+}
+
+#container section:nth-last-child(1) {
+    margin-right: 0;
+}
+
+.strike {
+    text-decoration: line-through;
+    font-style: italic;
+}
